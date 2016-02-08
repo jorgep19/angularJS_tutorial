@@ -3,7 +3,8 @@
 // Create the app object with no depencies (dependencies = [])
 var tutorialApp = angular.module('AngularTutorialApp', [
   'ngRoute',
-  'tutControllers'
+  'tutControllers',
+  'tutFilters'
 ]);
 
 tutorialApp.config(['$routeProvider', 
