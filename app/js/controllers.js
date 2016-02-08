@@ -2,6 +2,12 @@
 
 var controllersMod = angular.module('tutControllers', []);
 
+controllersMod.controller('AppCtrl', ['$scope',
+    function($scope) {
+        $scope.query = "";
+    }
+]);
+
 // append the phoneListCtrl to my tutorial app. We are using an annotation 
 // for the injections so that angular's injector can pick up depencies even 
 // when the code has been minified.
