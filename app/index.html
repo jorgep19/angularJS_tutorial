@@ -19,6 +19,8 @@
           <select ng-model="orderProp">
             <option value="name">Alphabetical</option>
             <option value="age">Newest</option>
+            <!-- thes '-' in this case causes a reverse order -->
+            <option value="-age">Oldest</option>
           </select>
         </div>
 
@@ -30,6 +32,9 @@
               <p>{{phone.snippet}}</p>
             </li>
           </ul>
+
+          <!-- See the list in json format.. This will deff be handy for inline code examples -->
+          <!-- <pre>{{phones | filter:query | orderBy:orderProp | json}}</pre>  -->
         </div>
       </div>
     </div>
