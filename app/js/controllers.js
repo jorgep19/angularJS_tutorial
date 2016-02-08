@@ -57,7 +57,12 @@ controllersMod.controller('PhoneDetailCtrl', ['$scope', '$http', '$routeParams',
     $http.get(getPhoneUrl($scope.phoneId))
         .success(function(data) { 
             $scope.phone = data; 
+            $scope.mainImageUrl = data.images[0];
         });
+
+    $scope.setImage = function(imageUrl) {
+      $scope.mainImageUrl = imageUrl;
+    };
 
     function getPhoneUrl(phoneId) {
         return 'phones/' + phoneId + '.json'
