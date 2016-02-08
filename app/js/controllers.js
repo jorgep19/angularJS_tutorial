@@ -1,9 +1,11 @@
 'use strict';
 
+var controllersMod = angular.module('tutControllers', []);
+
 // append the phoneListCtrl to my tutorial app. We are using an annotation 
 // for the injections so that angular's injector can pick up depencies even 
 // when the code has been minified.
-tutorialApp.controller('PhoneListCtrl', ['$scope', '$http', 
+controllersMod.controller('PhoneListCtrl', ['$scope', '$http', 
   function PhoneListCtrl($scope, $http) {
     // append phones attribute to the scope local to the phoneListCtrl
     // Note: this scope inherits prototypically the attributes of the 
@@ -39,4 +41,10 @@ tutorialApp.controller('PhoneListCtrl', ['$scope', '$http',
 
 // Other way of achieiving the injection beyond minification is:
 // PhoneListCtrl.$inject = ['$scope', '$http']
-// tutorialApp.controller('PhoneListCtrl', PhoneListCtrl);
+// controllersMod.controller('PhoneListCtrl', PhoneListCtrl);
+
+
+controllersMod.controller('PhoneDetailCtrl', ['$scope', '$routeParams',
+  function($scope, $routeParams) {
+    $scope.phoneId = $routeParams.phoneId;
+  }]);

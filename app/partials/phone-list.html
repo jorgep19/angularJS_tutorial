@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <div class="row">
+    <!--Sidebar content-->
+    <div class="col-md-2">
+      Search: <input ng-model="query">
+
+      Sort by:
+      <select ng-model="orderProp">
+        <option value="name">Alphabetical</option>
+        <option value="age">Newest</option>
+        <!-- thes '-' in this case causes a reverse order -->
+        <option value="-age">Oldest</option>
+      </select>
+    </div>
+
+    <!--Body content-->
+    <div class="col-md-10">
+      <ul class="phones">
+        <li ng-repeat="phone in phones | filter:query | orderBy: orderProp" class="thumbnail">
+          <a href="#/phones/{{phone.id}}" class="thumb">
+            <!-- Notice that the source for the image is from ng-src and not from 
+                 the traditional src attribute -->
+            <img ng-src="{{phone.imageUrl}}" alt="{{phone.name}}">
+          </a>
+          <!-- Notice the # at the beginning of the link to signified localhost -->
+          <a href="#/phones/{{phone.id}}">{{phone.name}}</a>
+          <p>{{phone.snippet}}</p>
+        </li> 
+      </ul>
+
+      <!-- See the list in json format.. This will deff be handy for inline code examples -->
+      <!-- <pre>{{phones | filter:query | orderBy:orderProp | json}}</pre>  -->
+    </div>
+  </div>
+</div>
