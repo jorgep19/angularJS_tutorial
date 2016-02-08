@@ -1,7 +1,7 @@
 'use strict';
 
 /* jasmine specs for controllers go here */
-
+// This unit test are written with the Jasmine API and are run using Karma
 describe('AngularTutorialApp', function() {
 
   // before each test create our app module
