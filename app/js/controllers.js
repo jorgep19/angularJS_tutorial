@@ -50,7 +50,39 @@ controllersMod.controller('PhoneListCtrl', ['$scope', '$http',
 // controllersMod.controller('PhoneListCtrl', PhoneListCtrl);
 
 
-controllersMod.controller('PhoneDetailCtrl', ['$scope', '$routeParams',
-  function($scope, $routeParams) {
+controllersMod.controller('PhoneDetailCtrl', ['$scope', '$http', '$routeParams',
+  function($scope, $http, $routeParams) {
     $scope.phoneId = $routeParams.phoneId;
+
+    $http.get(getPhoneUrl($scope.phoneId))
+        .success(function(data) { 
+            $scope.phone = data; 
+        });
+
+    function getPhoneUrl(phoneId) {
+        return 'phones/' + phoneId + '.json'
+    }
   }]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
