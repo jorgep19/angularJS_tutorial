@@ -1,8 +1,5 @@
 'use strict';
 
-// Create the app object with no depencies (dependencies = [])
-var tutorialApp = angular.module('AngularTutorialApp', []);
-
 // append the phoneListCtrl to my tutorial app to the
 tutorialApp.controller('PhoneListCtrl', function($scope) {
   // append phones attribute to the scope local to the phoneListCtrl

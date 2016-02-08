@@ -12,7 +12,6 @@ describe('Angular Tutorial App', function() {
       browser.get('app/index.html');
     });
 
-
     it('should filter the phone list as a user types into the search box', function() {
       // fetch the list shown on the ui by querying for its repeater definition
       var phoneList = element.all(by.repeater('phone in phones'));
@@ -36,4 +35,17 @@ describe('Angular Tutorial App', function() {
       expect(phoneList.count()).toBe(2);
     });
   });
+
+  it('should display the current filter value in the title bar', function() {
+      // fetch the list shown on the ui by querying for its repeater definition
+      var phoneList = element.all(by.repeater('phone in phones'));
+      // look for the query model
+      var query = element(by.model('query'));
+      
+      query.clear();
+      expect(browser.getTitle()).toMatch(/Google Phone Gallery:\s*$/);
+
+      query.sendKeys('nexus');
+      expect(browser.getTitle()).toMatch(/Google Phone Gallery: nexus$/);
+    });
 });
