@@ -23,7 +23,8 @@ tutorialApp.controller('PhoneListCtrl', ['$scope', '$http',
 
 
     // Simple GET AJAX request to get phones data from the server
-    // 
+    // notice that we only need the route in our server no the full
+    // url
     $http.get('phones/phones.json')
         .success(function(data) { 
             $scope.phones = data; 

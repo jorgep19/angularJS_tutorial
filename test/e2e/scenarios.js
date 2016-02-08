@@ -17,24 +17,6 @@ describe('Angular Tutorial App', function() {
     // look for the query model
     var query = element(by.model('query'));
 
-    it('should filter the phone list as a user types into the search box', function() {
-      // verify that we see 3 phones at the begginning 
-      expect(phoneList.count()).toBe(3);
-
-      // should see 1 matches when query is 'nexus'
-      query.sendKeys('nexus');
-      expect(phoneList.count()).toBe(1);
-
-
-      // should see 3 matches when the query is cleared
-      query.clear();
-      expect(phoneList.count()).toBe(3);
-
-      // should see 2 matches when query is 'motorola'
-      query.sendKeys('motorola');
-      expect(phoneList.count()).toBe(2);
-    });
-
     it('should display the current filter value in the title bar', function() {
       query.clear();
       expect(browser.getTitle()).toMatch(/Google Phone Gallery:\s*$/);
@@ -69,5 +51,14 @@ describe('Angular Tutorial App', function() {
     //     "Motorola XOOM\u2122 with Wi-Fi"
     //   ]);
     // });
+
+     it('should render phone specific links', function() {
+      var query = element(by.model('query'));
+      query.sendKeys('nexus');
+      element.all(by.css('.phones li a')).first().click();
+      browser.getLocationAbsUrl().then(function(url) {
+        expect(url).toBe('/phones/nexus-s');
+      });
+    });
   });
 });
