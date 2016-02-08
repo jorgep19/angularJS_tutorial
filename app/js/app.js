@@ -4,7 +4,8 @@
 var tutorialApp = angular.module('AngularTutorialApp', [
   'ngRoute',
   'tutControllers',
-  'tutFilters'
+  'tutFilters',
+  'tutServices'
 ]);
 
 tutorialApp.config(['$routeProvider', 

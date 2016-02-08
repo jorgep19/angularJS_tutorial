@@ -1,6 +1,6 @@
 'use strict';
 
-var controllersMod = angular.module('tutControllers', []);
+var controllersMod = angular.module('tutControllers', ['tutServices']);
 
 controllersMod.controller('AppCtrl', ['$scope',
     function($scope) {
@@ -11,8 +11,8 @@ controllersMod.controller('AppCtrl', ['$scope',
 // append the phoneListCtrl to my tutorial app. We are using an annotation 
 // for the injections so that angular's injector can pick up depencies even 
 // when the code has been minified.
-controllersMod.controller('PhoneListCtrl', ['$scope', '$http', 
-  function PhoneListCtrl($scope, $http) {
+controllersMod.controller('PhoneListCtrl', ['$scope', 'Phone',
+  function PhoneListCtrl($scope, Phone) {
     // append phones attribute to the scope local to the phoneListCtrl
     // Note: this scope inherits prototypically the attributes of the 
     //       parent scope. 
@@ -33,14 +33,15 @@ controllersMod.controller('PhoneListCtrl', ['$scope', '$http',
     // Simple GET AJAX request to get phones data from the server
     // notice that we only need the route in our server no the full
     // url
-    $http.get('phones/phones.json')
-        .success(function(data) { 
-            $scope.phones = data; 
-            // show just a segment of the data received
-            // $scope.phones = data.splice(0, 5);
-        });
+    // $http.get('phones/phones.json')
+    //     .success(function(data) { 
+    //         $scope.phones = data; 
+    //         // show just a segment of the data received
+    //         // $scope.phones = data.splice(0, 5);
+    //     });
 
-
+    // Get phones from Resource Service
+    $scope.phones = Phone.query();
 
     $scope.orderProp = 'age';
   }]);
@@ -50,23 +51,16 @@ controllersMod.controller('PhoneListCtrl', ['$scope', '$http',
 // controllersMod.controller('PhoneListCtrl', PhoneListCtrl);
 
 
-controllersMod.controller('PhoneDetailCtrl', ['$scope', '$http', '$routeParams',
-  function($scope, $http, $routeParams) {
-    $scope.phoneId = $routeParams.phoneId;
-
-    $http.get(getPhoneUrl($scope.phoneId))
-        .success(function(data) { 
-            $scope.phone = data; 
-            $scope.mainImageUrl = data.images[0];
-        });
+controllersMod.controller('PhoneDetailCtrl', ['$scope', '$routeParams', 'Phone',
+  function($scope, $routeParams, Phone) {
+    var phoneId = $routeParams.phoneId;
+    $scope.phone = Phone.get({phoneId: phoneId }, function(phone) {
+        $scope.mainImageUrl = phone.images[0];
+    });
 
     $scope.setImage = function(imageUrl) {
       $scope.mainImageUrl = imageUrl;
     };
-
-    function getPhoneUrl(phoneId) {
-        return 'phones/' + phoneId + '.json'
-    }
   }]);
 
 
